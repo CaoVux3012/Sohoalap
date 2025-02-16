@@ -1,0 +1,40 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn.datasets import load_iris
+
+# 1. Biểu đồ đường biểu diễn hàm số y = x^2 trên khoảng [-10, 10]
+x = np.linspace(-10, 10, 100)
+y = x ** 2
+
+plt.figure(figsize=(8, 5))
+plt.plot(x, y, label="y = x^2", color="blue")
+plt.title("Biểu đồ hàm số y = x^2")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.legend()
+plt.grid()
+plt.show()
+# 2. biểu đồ cột thể hiện điểm số (Score) của các sinh viên Bài tập 3
+data_scores = {
+    "Name": ["Alice", "Bob", "Charlie", "David", "Eva"],
+    "Score": [80, 90, 70, 90, 85]
+}
+df_scores = pd.DataFrame(data_scores)
+plt.figure(figsize=(8, 5))
+plt.bar(df_scores["Name"], df_scores["Score"], color="skyblue")
+plt.title("Điểm số của sinh viên")
+plt.xlabel("Tên")
+plt.ylabel("Điểm số")
+plt.show()
+# 3. Biểu đồ tròn (pie chart) thể hiện phần trăm mỗi loại hoa trong tập dữ liệu Iris
+iris = load_iris()
+iris_data = pd.DataFrame(iris.data, columns=iris.feature_names)
+iris_data["target"] = iris.target
+iris_data["target_name"] = iris.target_names[iris_data["target"]]
+# Đếm số lượng từng loại hoa
+iris_counts = iris_data["target_name"].value_counts()
+plt.figure(figsize=(8, 5))
+plt.pie(iris_counts, labels=iris_counts.index, autopct="%1.1f%%", startangle=90, colors=["lightblue", "lightgreen", "pink"])
+plt.title("Phần trăm mỗi loại hoa trong tập dữ liệu Iris")
+plt.show()
