@@ -1,0 +1,38 @@
+# 1. Biểu đồ phân tán với màu sắc theo loại hoa
+import numpy as np
+from sklearn.datasets import load_iris
+import matplotlib.pyplot as plt
+
+# Load dữ liệu Iris
+iris = load_iris()
+data = iris['data']  # Lấy dữ liệu (sepal_length, sepal_width, petal_length, petal_width)
+target = iris['target']  # Nhãn (species)
+target_names = iris['target_names']  # Tên các loài hoa
+
+# Lấy sepal_length và sepal_width
+sepal_length = data[:, 0]
+sepal_width = data[:, 1]
+
+# Màu sắc tương ứng với các loài hoa
+colors = ['red', 'blue', 'green']  # setosa: đỏ, versicolor: xanh dương, virginica: xanh lá
+
+# Vẽ biểu đồ phân tán
+plt.figure(figsize=(8, 6))
+for i, color in enumerate(colors):
+    plt.scatter(
+        sepal_length[target == i], 
+        sepal_width[target == i], 
+        c=color, 
+        label=target_names[i], 
+        edgecolor='k'
+    )
+
+# Thêm tiêu đề, nhãn trục và chú thích
+plt.title('Phân tán Sepal Length và Sepal Width', fontsize=14)
+plt.xlabel('Sepal Length', fontsize=12)
+plt.ylabel('Sepal Width', fontsize=12)
+plt.legend(title="Loài hoa")
+plt.grid(True)
+
+# Hiển thị biểu đồ
+plt.show()
