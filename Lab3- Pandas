@@ -1,0 +1,46 @@
+import pandas as pd
+import numpy as np
+data = {
+    "ID": [10, 102, 103, 104, 105],
+    "Name": ["Quynh Nhu", "Hoang Hai", None, "Phuong Tuan", "Thien An"],
+    "Age": [26, 18, 20, None, 19],
+    "Salary": [50000, 35000, 65000, 100000, None]
+}
+df = pd.DataFrame(data)
+# Điền giá trị thiếu trong cột Age = giá trị trung bình
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+# Điền giá trị thiếu trong cột Name = "Unknown"
+df["Name"] = df["Name"].fillna("Unknown")
+# Loại bỏ hàng có giá trị NaN
+df = df.dropna()
+print(df)
+# Điền giá trị thiếu trong cột Age = giá trị trung bình
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+#loại bỏ các dòng dữ liệu còn thiếu
+df.dropna(inplace=True)
+#điền giá trị còn thiếu trong Name ="Unknown"ArtithmeticError
+df["Name"] = df["Name"].fillna("Unknown")
+#Điền giá trị thiếu trong Salary = phương pháp Interpolation
+df["Salary"] = df["Salary"].interpolate(method="linear")
+
+import pandas as pd
+
+# cho data
+df1 = pd.DataFrame({
+    "Id": [1,2,3],
+    "Score_A": [70,90,85]
+})
+
+df2 = pd.DataFrame({
+    "Id": [3,4,5],
+    "Score_B": [62,91,75]
+})
+
+# Thực hiện Merge trên cột id ( Inner join, left join, outer join)
+pd.merge(df1, df2, on = "Id", how = "inner")
+
+# Nối DataFrame theo chiều dọc
+pd.concat([df1,df2], axis=0)
+
+# Gộp df1 và df2 để điền giá trị thiếu
+df1.set_index("Id").combine_first(df2.set_index("Id")).reset_index()
