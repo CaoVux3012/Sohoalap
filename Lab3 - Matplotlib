@@ -1,0 +1,76 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+
+# Dữ liệu
+np.random.seed(42)
+t = np.linspace(0, 10, 100)
+y1 = np.sin(t)
+y2 = np.cos(t)
+y3 = np.sin(t) * np.cos(t)
+
+# Biểu đồ nhiều đường
+plt.figure(figsize=(10, 5))
+plt.plot(t, y1, label='sin(t)')
+plt.plot(t, y2, label='cos(t)')
+plt.plot(t, y3, label='sin(t)*cos(t)')
+plt.legend()
+plt.title("Biểu đồ nhiều đường")
+plt.xlabel("Thời gian")
+plt.ylabel("Giá trị")
+plt.grid()
+plt.show()
+
+# Biểu đồ thanh nhóm
+labels = ["Q1", "Q2", "Q3", "Q4"]
+A = [500, 700, 800, 600]
+B = [450, 350, 650, 750]
+C = [500, 250, 850, 600]
+x = np.arange(len(labels))
+width = 0.3
+
+plt.figure(figsize=(8, 5))
+plt.bar(x - width, A, width, label='Công ty A')
+plt.bar(x, B, width, label='Công ty B')
+plt.bar(x + width, C, width, label='Công ty C')
+plt.xticks(x, labels)
+plt.title("Biểu đồ thanh nhóm")
+plt.legend()
+plt.show()
+
+# Biểu đồ tròn
+Cty = ["A", "B", "C", "D"]
+thipham = [30, 25, 25, 20]
+colors = ["#ff9999", "#66b3ff", "#99ff99", "#ffcc99"]
+plt.figure(figsize=(6, 6))
+plt.pie(thipham, labels=Cty, autopct='%1.1f%%', colors=colors, startangle=90)
+plt.title("Thị phần công ty")
+plt.show()
+
+# Biểu đồ phân tán
+x = np.random.rand(100)
+y = np.random.rand(100)
+sizes = np.random.rand(100) * 300
+colors = np.random.rand(100)
+plt.figure(figsize=(7, 5))
+plt.scatter(x, y, s=sizes, c=colors, alpha=0.5, cmap='viridis')
+plt.colorbar()
+plt.title("Biểu đồ phân tán")
+plt.show()
+
+# Vẽ biểu đồ phân tán ngẫu nhiên
+plt.figure(figsize=(8, 6))
+plt.scatter(x, y, s=sizes, c=colors, alpha=0.5, cmap='viridis')
+plt.colorbar(label="Màu sắc biểu thị giá trị")
+plt.xlabel("Biến X ngẫu nhiên")
+plt.ylabel("Biến Y ngẫu nhiên")
+plt.title("Biểu đồ phân tán của hai biến ngẫu nhiên")
+plt.show()
+
+# Biểu đồ nhiệt (Heatmap)
+data = np.random.rand(10, 10)
+
+plt.figure(figsize=(8, 6))
+sns.heatmap(data, annot=True, cmap="coolwarm", linewidths=0.5)
+plt.title("Biểu đồ nhiệt (Heatmap)")
+plt.show()
